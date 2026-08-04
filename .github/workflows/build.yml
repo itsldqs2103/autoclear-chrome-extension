@@ -25,20 +25,25 @@ jobs:
         env:
           EXTENSION_KEY: ${{ secrets.EXTENSION_KEY }}
         run: |
-          printf '%s' "$EXTENSION_KEY" > extension.pem
+          printf '%s' "$EXTENSION_KEY" > ../extension.pem
 
       - name: Pack CRX
         run: |
           chromium \
             --headless \
+            --no-sandbox \
             --pack-extension="$(pwd)" \
-            --pack-extension-key="$(pwd)/extension.pem"
+            --pack-extension-key="$(pwd)/../extension.pem"
 
           mv *.crx "${{ github.event.repository.name }}.crx"
 
       - name: Remove private key
         run: |
-          rm -f extension.pem
+          rm -f ../extension.pem
+
+      - name: Verify CRX
+        run: |
+          ls -lh "${{ github.event.repository.name }}.crx"
 
       - name: Create GitHub Release
         uses: softprops/action-gh-release@v2
