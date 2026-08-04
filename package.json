@@ -1,0 +1,26 @@
+{
+  "name": "startup-browsing-data-cleaner",
+  "version": "1.0.0",
+  "description": "Automatically clears browsing data each time Chrome starts.",
+  "homepage": "https://github.com/itsldqs2103/startup-browsing-data-cleaner#readme",
+  "bugs": {
+    "url": "https://github.com/itsldqs2103/startup-browsing-data-cleaner/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/itsldqs2103/startup-browsing-data-cleaner.git"
+  },
+  "license": "MIT",
+  "author": "itsldqs2103",
+  "type": "commonjs",
+  "main": "background.js",
+  "devDependencies": {
+    "esbuild": "^0.28.1"
+  },
+  "allowScripts": {
+    "esbuild@0.28.1": true
+  },
+  "scripts": {
+    "build": "esbuild src/script.js --bundle --minify --outfile=dist/script.js"
+  }
+}
