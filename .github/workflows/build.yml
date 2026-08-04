@@ -1,9 +1,9 @@
-name: Build Chrome Extension
+name: Build Chrome Extension Release
 
 on:
   push:
-    branches: [main]
-  workflow_dispatch:
+    tags:
+      - "v*"
 
 jobs:
   build:
@@ -15,12 +15,11 @@ jobs:
 
       - name: Create ZIP
         run: |
-          zip -r extension.zip . \
+          zip -r "${{ github.event.repository.name }}.zip" . \
             -x ".git/*" \
                ".github/*"
 
-      - name: Upload artifact
-        uses: actions/upload-artifact@v4
+      - name: Create GitHub Release
+        uses: softprops/action-gh-release@v2
         with:
-          name: chrome-extension
-          path: extension.zip
+          files: ${{ github.event.repository.name }}.zip
