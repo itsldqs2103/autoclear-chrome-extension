@@ -2,6 +2,12 @@
   box-sizing: border-box;
 }
 
+:root {
+  --transition-fast: 140ms cubic-bezier(0.2, 0.8, 0.2, 1);
+  --transition: 220ms cubic-bezier(0.22, 1, 0.36, 1);
+  --transition-bounce: 280ms cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
 body {
   margin: 0;
   min-width: 340px;
@@ -93,12 +99,15 @@ body {
   height: 1.3rem;
   border-radius: 999px;
   background: #334155;
-  transition: background 160ms ease;
+  transition:
+    background var(--transition),
+    box-shadow var(--transition),
+    transform var(--transition);
   flex-shrink: 0;
 }
 
 .switch-track::after {
-  content: '';
+  content: "";
   position: absolute;
   top: 0.14rem;
   left: 0.14rem;
@@ -107,7 +116,9 @@ body {
   border-radius: 50%;
   background: #ffffff;
   box-shadow: 0 1px 4px rgba(15, 23, 42, 0.18);
-  transition: transform 160ms ease;
+  transition:
+    transform var(--transition-bounce),
+    box-shadow var(--transition);
 }
 
 .switch-input:checked + .switch-track {
@@ -168,7 +179,11 @@ body {
   background: #0f172a;
   border: 1px solid #243246;
   padding: 0.42rem 0.58rem;
-  transition: transform 100ms ease, box-shadow 100ms ease, border-color 100ms ease;
+  transition:
+    transform var(--transition),
+    box-shadow var(--transition),
+    border-color var(--transition),
+    background var(--transition);
 }
 
 .setting-row:hover {
@@ -200,7 +215,12 @@ body {
   font-size: 0.76rem;
   font-weight: 700;
   cursor: pointer;
-  transition: transform 100ms ease, box-shadow 100ms ease, opacity 100ms ease;
+  transition:
+    transform var(--transition-bounce),
+    box-shadow var(--transition),
+    background var(--transition),
+    border-color var(--transition),
+    opacity var(--transition);
 }
 
 .action-button:hover:not(:disabled) {
@@ -241,4 +261,140 @@ body {
 
 .status-text.error {
   color: #fca5a5;
+}
+
+.setting-row:active {
+  transform: scale(0.985);
+}
+
+.setting-row:focus-within {
+  border-color: #8b5cf6;
+  box-shadow: 0 0 0 3px rgba(139, 92, 246, 0.18);
+}
+
+.switch-track:hover {
+  transform: scale(1.03);
+}
+
+.switch-track:active {
+  transform: scale(0.96);
+}
+
+.switch-input:checked + .switch-track::after {
+  transform: translateX(1rem) scale(1.05);
+}
+
+.check-input {
+  width: 0.95rem;
+  height: 0.95rem;
+  accent-color: #8b5cf6;
+  cursor: pointer;
+  transition:
+    transform var(--transition-bounce),
+    filter var(--transition),
+    opacity var(--transition);
+}
+
+.check-input:hover {
+  transform: scale(1.12);
+}
+
+.check-input:active {
+  transform: scale(0.88);
+}
+
+.check-input:checked {
+  animation: checkbox-pop 240ms cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+.check-input:focus-visible {
+  outline: 2px solid rgba(139, 92, 246, 0.45);
+  outline-offset: 2px;
+}
+
+@keyframes checkbox-pop {
+  0% {
+    transform: scale(0.7);
+  }
+  55% {
+    transform: scale(1.18);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+
+.action-button:hover:not(:disabled) {
+  transform: translateY(-2px) scale(1.03);
+}
+
+.action-button:active:not(:disabled) {
+  transform: scale(0.96);
+}
+
+.section-chip {
+  transition:
+    transform var(--transition),
+    background var(--transition),
+    border-color var(--transition),
+    color var(--transition);
+}
+
+.section-chip:hover {
+  transform: scale(1.05);
+}
+
+.setting-banner,
+.section-card,
+.status-box {
+  transition:
+    transform var(--transition),
+    box-shadow var(--transition),
+    border-color var(--transition);
+}
+
+.setting-banner:hover,
+.section-card:hover,
+.status-box:hover {
+  transform: translateY(-1px);
+}
+
+.label-text,
+.toggle-label,
+.toggle-help,
+.status-text {
+  transition:
+    color var(--transition),
+    opacity var(--transition);
+}
+
+.popup-card {
+  animation: popupIn 320ms cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+@keyframes popupIn {
+  from {
+    opacity: 0;
+    transform: translateY(10px) scale(0.94);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+button,
+label,
+input,
+.switch-track,
+.setting-row,
+.section-chip {
+  -webkit-tap-highlight-color: transparent;
+}
+
+button,
+label,
+.switch-track,
+.setting-row {
+  will-change: transform;
 }
