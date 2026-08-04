@@ -13,7 +13,7 @@
   "license": "MIT",
   "author": "itsldqs2103",
   "type": "commonjs",
-  "main": "background.js",
+  "main": "dist/script.js",
   "devDependencies": {
     "esbuild": "^0.28.1"
   },
