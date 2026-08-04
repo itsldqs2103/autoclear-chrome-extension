@@ -6,5 +6,11 @@
   "permissions": ["browsingData"],
   "background": {
     "service_worker": "background.js"
+  },
+  "action": {
+    "default_title": "Startup Browsing Data Cleaner"
+  },
+  "icons": {
+    "128": "icons/icon128.png"
   }
 }

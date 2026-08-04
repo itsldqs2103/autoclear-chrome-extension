@@ -1,4 +1,4 @@
-chrome.runtime.onStartup.addListener(() =>
+function clearBrowsingData() {
   chrome.browsingData.remove(
     {},
     {
@@ -14,5 +14,8 @@ chrome.runtime.onStartup.addListener(() =>
       passwords: true,
       serviceWorkers: true,
     },
-  ),
-);
+  );
+}
+
+chrome.runtime.onStartup.addListener(clearBrowsingData);
+chrome.action.onClicked.addListener(clearBrowsingData);
