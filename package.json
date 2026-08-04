@@ -21,6 +21,6 @@
     "esbuild@0.28.1": true
   },
   "scripts": {
-    "build": "esbuild src/script.js --bundle --minify --outfile=dist/script.js"
+    "build": "esbuild src/script.js src/popup.js --bundle --minify --outdir=dist"
   }
 }

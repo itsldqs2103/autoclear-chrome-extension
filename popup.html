@@ -1,0 +1,103 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>AutoClear Settings</title>
+  <link rel="stylesheet" href="dist/popup.css" />
+</head>
+
+<body>
+  <div class="popup-shell">
+    <div class="popup-card">
+      <div class="popup-body">
+        <div class="popup-header">
+          <div>
+            <p class="eyebrow">AutoClear</p>
+            <h2 class="title">User settings</h2>
+          </div>
+        </div>
+
+        <div class="setting-banner">
+          <label class="toggle-row">
+            <input id="enabledToggle" type="checkbox" class="switch-input" />
+            <span class="switch-track" aria-hidden="true"></span>
+            <span class="toggle-copy">
+              <span class="toggle-label">Enable AutoClear</span>
+              <span class="toggle-help">Startup cleanup</span>
+            </span>
+          </label>
+        </div>
+
+        <div class="section-card">
+          <div class="section-header">
+            <p>Clear types</p>
+            <span class="section-chip">11 options</span>
+          </div>
+
+          <div class="setting-grid">
+            <label class="setting-row">
+              <input data-option="cache" type="checkbox" class="check-input" />
+              <span class="label-text">Cache</span>
+            </label>
+            <label class="setting-row">
+              <input data-option="cacheStorage" type="checkbox" class="check-input" />
+              <span class="label-text">Cache Storage</span>
+            </label>
+            <label class="setting-row">
+              <input data-option="cookies" type="checkbox" class="check-input" />
+              <span class="label-text">Cookies</span>
+            </label>
+            <label class="setting-row">
+              <input data-option="downloads" type="checkbox" class="check-input" />
+              <span class="label-text">Downloads</span>
+            </label>
+            <label class="setting-row">
+              <input data-option="fileSystems" type="checkbox" class="check-input" />
+              <span class="label-text">File Systems</span>
+            </label>
+            <label class="setting-row">
+              <input data-option="formData" type="checkbox" class="check-input" />
+              <span class="label-text">Form Data</span>
+            </label>
+            <label class="setting-row">
+              <input data-option="history" type="checkbox" class="check-input" />
+              <span class="label-text">History</span>
+            </label>
+            <label class="setting-row">
+              <input data-option="indexedDB" type="checkbox" class="check-input" />
+              <span class="label-text">IndexedDB</span>
+            </label>
+            <label class="setting-row">
+              <input data-option="localStorage" type="checkbox" class="check-input" />
+              <span class="label-text">Local Storage</span>
+            </label>
+            <label class="setting-row">
+              <input data-option="passwords" type="checkbox" class="check-input" />
+              <span class="label-text">Passwords</span>
+            </label>
+            <label class="setting-row">
+              <input data-option="serviceWorkers" type="checkbox" class="check-input" />
+              <span class="label-text">Service Workers</span>
+            </label>
+          </div>
+        </div>
+
+        <div class="action-row">
+          <button id="saveButton" class="action-button action-button-primary" type="button">Save settings</button>
+          <button id="undoButton" class="action-button action-button-secondary" type="button" style="display: none">Undo
+            changes</button>
+        </div>
+
+        <div class="status-box">
+          <p id="statusMessage" class="status-text"></p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script src="dist/popup.js"></script>
+</body>
+
+</html>

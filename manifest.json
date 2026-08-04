@@ -3,12 +3,13 @@
   "name": "AutoClear",
   "version": "1.0.0",
   "description": "Automatically clear browsing data on browser startup.",
-  "permissions": ["browsingData"],
+  "permissions": ["browsingData", "storage"],
   "background": {
     "service_worker": "dist/script.js"
   },
   "action": {
-    "default_title": "AutoClear"
+    "default_title": "AutoClear",
+    "default_popup": "popup.html"
   },
   "icons": {
     "128": "icons/icon128.png"
