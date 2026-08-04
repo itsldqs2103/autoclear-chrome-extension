@@ -1,4 +1,4 @@
-name: Build Chrome Extension Release
+name: Build Chrome Extension CRX
 
 on:
   push:
@@ -13,16 +13,35 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Checkout
+      - name: Checkout source
         uses: actions/checkout@v4
 
-      - name: Create ZIP
+      - name: Install Chromium
         run: |
-          zip -r "${{ github.event.repository.name }}.zip" . \
-            -x ".git/*" \
-               ".github/*"
+          sudo apt update
+          sudo apt install -y chromium
+
+      - name: Create extension key
+        env:
+          EXTENSION_KEY: ${{ secrets.EXTENSION_KEY }}
+        run: |
+          printf '%s' "$EXTENSION_KEY" > extension.pem
+
+      - name: Pack CRX
+        run: |
+          chromium \
+            --headless \
+            --pack-extension="$(pwd)" \
+            --pack-extension-key="$(pwd)/extension.pem"
+
+          mv *.crx "${{ github.event.repository.name }}.crx"
+
+      - name: Remove private key
+        run: |
+          rm -f extension.pem
 
       - name: Create GitHub Release
         uses: softprops/action-gh-release@v2
         with:
-          files: ${{ github.event.repository.name }}.zip
+          files: |
+            ${{ github.event.repository.name }}.crx
