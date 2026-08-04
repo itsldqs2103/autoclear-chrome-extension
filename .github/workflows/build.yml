@@ -54,7 +54,7 @@ jobs:
           cp LICENSE release/
           if [ -f README.md ]; then cp README.md release/; fi
 
-      - name: Create ZIP archive
+      - name: Create source ZIP archive
         run: |
           cd release
           zip -r "../autoclear-${VERSION}.zip" .
@@ -65,7 +65,7 @@ jobs:
           CRX_PRIVATE_KEY: ${{ secrets.CRX_PRIVATE_KEY }}
         run: |
           printf '%s' "$CRX_PRIVATE_KEY" > key.pem
-          npx crx pack ./release -o "./autoclear-${VERSION}.crx" -p ./key.pem --zip-output "./autoclear-${VERSION}.zip"
+          npx crx pack ./release -o "./autoclear-${VERSION}.crx" -p ./key.pem
 
       - name: Upload ZIP artifact
         uses: actions/upload-artifact@v4
