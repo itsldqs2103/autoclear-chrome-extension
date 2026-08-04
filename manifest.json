@@ -1,0 +1,10 @@
+{
+  "manifest_version": 3,
+  "name": "Startup Browsing Data Cleaner",
+  "version": "1.0",
+  "description": "Automatically clears browsing data each time Chrome starts.",
+  "permissions": ["browsingData"],
+  "background": {
+    "service_worker": "background.js"
+  }
+}
