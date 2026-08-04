@@ -1,0 +1,86 @@
+name: Build Chrome Extension Release
+
+on:
+  push:
+    tags:
+      - 'v*'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  build-release:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout source
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Build extension bundles
+        run: npm run build
+
+      - name: Capture extension version
+        run: |
+          VERSION=$(node -e "console.log(require('./manifest.json').version)")
+          echo "VERSION=$VERSION" >> "$GITHUB_ENV"
+
+      - name: Prepare release directory
+        run: |
+          mkdir -p release
+          cp manifest.json popup.html release/
+          cp -R dist release/
+          cp -R icons release/
+          cp LICENSE release/
+          if [ -f README.md ]; then cp README.md release/; fi
+
+      - name: Create ZIP archive
+        run: |
+          cd release
+          zip -r "../autoclear-${VERSION}.zip" .
+
+      - name: Create CRX package
+        if: ${{ secrets.CRX_PRIVATE_KEY != '' }}
+        env:
+          CRX_PRIVATE_KEY: ${{ secrets.CRX_PRIVATE_KEY }}
+        run: |
+          printf '%s' "$CRX_PRIVATE_KEY" > key.pem
+          npx crx pack ./release -o "./autoclear-${VERSION}.crx" -p ./key.pem --zip-output "./autoclear-${VERSION}.zip"
+
+      - name: Upload ZIP artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: autoclear-${{ env.VERSION }}-zip
+          path: autoclear-${{ env.VERSION }}.zip
+          if-no-files-found: error
+
+      - name: Upload CRX artifact
+        if: ${{ secrets.CRX_PRIVATE_KEY != '' }}
+        uses: actions/upload-artifact@v4
+        with:
+          name: autoclear-${{ env.VERSION }}-crx
+          path: autoclear-${{ env.VERSION }}.crx
+          if-no-files-found: error
+
+      - name: Publish ZIP to tag release
+        if: startsWith(github.ref, 'refs/tags/')
+        uses: softprops/action-gh-release@v2
+        with:
+          files: |
+            autoclear-${{ env.VERSION }}.zip
+
+      - name: Publish CRX to tag release
+        if: ${{ startsWith(github.ref, 'refs/tags/') && secrets.CRX_PRIVATE_KEY != '' }}
+        uses: softprops/action-gh-release@v2
+        with:
+          files: |
+            autoclear-${{ env.VERSION }}.crx
