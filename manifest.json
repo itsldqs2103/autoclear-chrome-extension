@@ -1,14 +1,14 @@
 {
   "manifest_version": 3,
-  "name": "Chrome Auto Clear Browsing Data",
+  "name": "AutoClear",
   "version": "1.0.0",
-  "description": "Automatically clears browsing data each time Chrome starts.",
+  "description": "Automatically clear browsing data on browser startup.",
   "permissions": ["browsingData"],
   "background": {
     "service_worker": "dist/script.js"
   },
   "action": {
-    "default_title": "Chrome Auto Clear Browsing Data"
+    "default_title": "AutoClear"
   },
   "icons": {
     "128": "icons/icon128.png"

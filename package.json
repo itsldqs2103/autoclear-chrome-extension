@@ -1,14 +1,14 @@
 {
-  "name": "Chrome Auto Clear Browsing Data",
+  "name": "AutoClear",
   "version": "1.0.0",
-  "description": "Automatically clears browsing data each time Chrome starts.",
-  "homepage": "https://github.com/itsldqs2103/chrome-auto-clear-browsing-data#readme",
+  "description": "Automatically clear browsing data on browser startup.",
+  "homepage": "https://github.com/itsldqs2103/autoclear-chrome-extension#readme",
   "bugs": {
-    "url": "https://github.com/itsldqs2103/chrome-auto-clear-browsing-data/issues"
+    "url": "https://github.com/itsldqs2103/autoclear-chrome-extension/issues"
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/itsldqs2103/chrome-auto-clear-browsing-data.git"
+    "url": "git+https://github.com/itsldqs2103/autoclear-chrome-extension.git"
   },
   "license": "MIT",
   "author": "itsldqs2103",
