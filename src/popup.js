@@ -1,4 +1,15 @@
+import tippy, { animateFill } from "tippy.js";
+import "tippy.js/dist/tippy.css";
 import "../src/popup.css";
+import "tippy.js/dist/backdrop.css";
+import "tippy.js/animations/shift-away.css";
+
+tippy(".setting-row", {
+  placement: "auto",
+  animateFill: true,
+  plugins: [animateFill],
+  maxWidth: "none",
+});
 
 const STORAGE_KEY = "autoClearUserSettings";
 const CLEARABLE_KEYS = [

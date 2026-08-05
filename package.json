@@ -22,5 +22,8 @@
   },
   "scripts": {
     "build": "esbuild src/script.js src/popup.js --bundle --minify --outdir=dist"
+  },
+  "dependencies": {
+    "tippy.js": "^6.3.7"
   }
 }
