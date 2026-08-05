@@ -38,4 +38,4 @@ This extension requires the following permissions:
 
 ## License
 
-This project is licensed under the [MIT License](https://github.com/itsldqs2103/autoclear-chrome-extension/blob/main/LICENSE).
+This project is licensed under the [MIT License](https://github.com/itsldqs2103/autoclear-chrome-extension?tab=MIT-1-ov-file).
